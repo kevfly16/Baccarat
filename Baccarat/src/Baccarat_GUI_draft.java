@@ -1,3 +1,4 @@
+//Kevin Flyangolts 109059608
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -240,6 +241,13 @@ public class Baccarat_GUI_draft extends JFrame {
 				JFrame frame = new JFrame();
 				JOptionPane.showMessageDialog(frame, "Please enter a bet.",
 						"Error", JOptionPane.WARNING_MESSAGE);
+			} else if (bet > purse) {
+				JFrame frame = new JFrame();
+				JOptionPane
+						.showMessageDialog(
+								frame,
+								"You don't have enough money in your purse to bet that amount.",
+								"Error", JOptionPane.WARNING_MESSAGE);
 			} else if (endOfRound == true) {
 				JFrame frame = new JFrame();
 				JOptionPane.showMessageDialog(frame, "Please press start.",
@@ -410,13 +418,34 @@ public class Baccarat_GUI_draft extends JFrame {
 			}
 
 		} else if (option.equals("b6")) {
+			if (rounds == 10) {
+				if (purse > 50) {
+					JFrame frame = new JFrame();
+					JOptionPane.showMessageDialog(frame,
+							"Player Wins. You have Completed 10 rounds. Game Over.");
+					System.exit(0);
+				} else if (purse == 50) {
+					JFrame frame = new JFrame();
+					JOptionPane.showMessageDialog(frame,
+							"It's a Tie. You have Completed 10 rounds. Game Over.");
+					System.exit(0);
+				} else {
+					JFrame frame = new JFrame();
+					JOptionPane.showMessageDialog(frame,
+							"Banker Wins. You have Completed 10 rounds. Game Over.");
+					System.exit(0);
+				}
+			}
 			if (endOfRound == false) {
 				JFrame frame = new JFrame();
 				JOptionPane.showMessageDialog(frame,
 						"Please press continue to begin.", "Error",
 						JOptionPane.WARNING_MESSAGE);
-			}
-			if (endOfRound && bet > 0) {
+			} else if (purse == 0) {
+				JFrame frame = new JFrame();
+				JOptionPane.showMessageDialog(frame,
+						"Game Over. Please exit the game to play again.");
+			} else if (endOfRound && bet > 0) {
 
 				this.dispose();
 				new Baccarat_GUI_draft();
@@ -464,7 +493,7 @@ public class Baccarat_GUI_draft extends JFrame {
 			fileString += "heart";
 		else if (c[1] == 2)
 			fileString += "diamond";
-		else if (c[1] == 2)
+		else if (c[1] == 3)
 			fileString += "club";
 		else
 			fileString += "spade";
@@ -539,7 +568,7 @@ public class Baccarat_GUI_draft extends JFrame {
 			card += "hearts";
 		else if (c[1] == 2)
 			card += "diamonds";
-		else if (c[1] == 2)
+		else if (c[1] == 3)
 			card += "clubs";
 		else
 			card += "spades";
